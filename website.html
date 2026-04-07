@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rujuta Kulkarni | Professional Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --peacock-deep: #004d4d;
+            --peacock-bright: #008080;
+            --peacock-light: #e0f2f1;
+            --accent-gold: #c5a059;
+            --text-dark: #1f2937;
+            --card-bg: #ffffff;
+            --overlay: rgba(0, 40, 40, 0.75);
+            --transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        [data-theme="dark"] {
+            --peacock-light: #002626;
+            --text-dark: #f9fafb;
+            --card-bg: #003333;
+            --overlay: rgba(0, 0, 0, 0.85);
+        }
+
+        body.mobile-view #main-container {
+            max-width: 375px; margin: 100px auto; border: 12px solid #333; border-radius: 40px;
+            height: 75vh; overflow-y: scroll; box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+            background: var(--peacock-light); position: relative;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--peacock-light); color: var(--text-dark); transition: var(--transition); overflow-x: hidden; }
+
+        .reveal-item { transition: var(--transition); opacity: 0.9; }
+        .reveal-item:hover { opacity: 1; transform: translateY(-8px); filter: brightness(1.1); }
+
+        nav {
+            background: var(--peacock-deep); padding: 15px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            position: fixed; width: 100%; top: 0; z-index: 5000;
+        }
+        .nav-logo { color: white; font-weight: 800; font-size: 1.1rem; }
+        .nav-links { display: flex; list-style: none; gap: 15px; align-items: center; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; transition: 0.3s; }
+        .nav-links a:hover { color: var(--accent-gold); }
+        .toggle-btn { background: var(--peacock-bright); border: none; color: white; padding: 6px 12px; border-radius: 5px; cursor: pointer; font-weight: 700; font-size: 0.75rem; }
+
+        .parallax-bg {
+            background-image: url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=2070');
+            background-attachment: fixed; background-position: center; background-size: cover;
+            position: relative;
+        }
+        .hero { height: 75vh; margin-top: 55px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8%; }
+        .hero-card {
+            background: var(--card-bg); padding: 45px; max-width: 480px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3); border-left: 8px solid var(--peacock-bright);
+            animation: appear 1s ease-out;
+        }
+        .hero-card h1 { font-family: 'Montserrat', sans-serif; font-size: 2.8rem; line-height: 1.1; margin-bottom: 10px; color: var(--text-dark); }
+        .accent-line { width: 50px; height: 4px; background: var(--peacock-bright); margin: 20px 0; }
+
+        .section { padding: 80px 10%; }
+        .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; text-align: left; }
+        .card { 
+            background: var(--card-bg); padding: 30px; border-radius: 12px; 
+            border-top: 6px solid var(--peacock-bright); box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
+        }
+
+        .expertise-overlay { background: var(--overlay); padding: 100px 10%; color: white; text-align: center; }
+        .skills-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; margin-top: 40px; }
+        .skill-card { 
+            background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); 
+            padding: 30px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); 
+            text-align: center;
+        }
+        .skill-card i { font-size: 2rem; color: var(--accent-gold); margin-bottom: 15px; }
+
+        .slider-section { overflow: hidden; background: var(--peacock-light); padding: 80px 0; }
+        .slider-track { display: flex; width: fit-content; animation: loop 40s linear infinite; }
+        .slider-track:hover { animation-play-state: paused; }
+        @keyframes loop { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        .project-card { width: 340px; margin: 0 15px; background: var(--card-bg); border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); flex-shrink: 0; }
+        .project-card img { width: 100%; height: 200px; object-fit: cover; }
+        .p-btn { background: var(--peacock-deep); color: white; border: none; padding: 12px; width: 100%; cursor: pointer; font-weight: 700; text-transform: uppercase; transition: 0.3s; }
+        .p-btn:hover { background: var(--peacock-bright); }
+
+        .contact-section { padding: 80px 10%; text-align: center; background: #fff; }
+        [data-theme="dark"] .contact-section { background: #001a1a; }
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; margin-top: 40px; text-align: left; }
+        .contact-info i { color: var(--peacock-bright); margin-right: 10px; width: 20px; }
+        .contact-info div { margin-bottom: 15px; font-weight: 500; }
+
+        .modal { display: none; position: fixed; z-index: 6000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); }
+        .modal-body { display: flex; width: 85%; height: 80%; margin: 5% auto; background: var(--card-bg); border-radius: 15px; overflow: hidden; border: 2px solid var(--peacock-bright); }
+        .modal-side { width: 35%; padding: 40px; background: var(--peacock-light); color: #333; overflow-y: auto; }
+        .modal-main { width: 65%; background: #000; }
+        .modal-main iframe { width: 100%; height: 100%; border: none; }
+        .close-btn { position: absolute; top: 20px; right: 30px; color: white; font-size: 40px; cursor: pointer; }
+
+        @keyframes appear { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 900px) {
+            .modal-body { flex-direction: column; overflow-y: scroll; }
+            .modal-side, .modal-main { width: 100%; height: auto; }
+            .modal-main { height: 350px; }
+        }
+    </style>
+</head>
+<body id="body-tag">
+
+<nav>
+    <div class="nav-logo">RUJUTA KULKARNI</div>
+    <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <button class="toggle-btn" onclick="toggleTheme()"><i class="fas fa-adjust"></i></button>
+        <button class="toggle-btn" onclick="toggleView()"><i class="fas fa-mobile-alt"></i></button>
+    </ul>
+</nav>
+
+<div id="main-container">
+    <header class="parallax-bg hero" id="home">
+        <div class="hero-card reveal-item">
+            <h1>Rujuta Kulkarni</h1>
+            <div class="accent-line"></div>
+            <p>Building intelligent systems with code, data, and hands-on engineering.</p>
+        </div>
+    </header>
+
+    <!-- Professional Summary Part -->
+    <section class="section" id="about">
+        <h2 style="color: var(--peacock-deep); margin-bottom: 20px; text-align:center;">Professional Summary</h2>
+        <div class="reveal-item" style="max-width: 800px; margin: 0 auto; line-height: 1.8; text-align: center;">
+            <p>Dynamic and driven student with a strong work ethic, a can-do attitude, and a passion for continuous learning. Eager to advance to a leadership position while becoming a thought leader in the industry. I bring a high level of enthusiasm, dedication, and a quick learning approach to every role. Seeking a position that offers opportunities for professional and technical growth, enabling upgrade of skills and acquisition of deeper industry knowledge.</p>
+        </div>
+    </section>
+
+    <!-- Education (Multiline Format) -->
+    <section class="section" id="education">
+        <h2 style="text-align: center; margin-bottom: 40px; color: var(--peacock-deep);">Academic Excellence</h2>
+        <div class="edu-grid">
+            <div class="card reveal-item">
+                <h3>Vellore Institute of<br>Technology,<br>Vellore</h3>
+                <p>B. Tech in<br>Computer Science<br>and Data Science</p>
+                <p style="margin-top: 15px;">Expected in<br>2028</p>
+                <p style="margin-top: 15px; color: var(--peacock-bright); font-weight: 800;">9.36 CGPA (As of<br>3rd semester)</p>
+            </div>
+            <div class="card reveal-item">
+                <h3>Aditya English<br>Medium School</h3>
+                <p>Secondary School<br>Diploma</p>
+                <p style="margin-top: 15px;">2024 92.5%</p>
+            </div>
+            <div class="card reveal-item">
+                <h3>Indira National<br>School</h3>
+                <p>Higher Secondary<br>Diploma</p>
+                <p style="margin-top: 15px;">2022 98.2%</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Mastery -->
+    <section class="parallax-bg" id="skills">
+        <div class="expertise-overlay">
+            <h2>Technical Mastery</h2>
+            <div class="skills-container">
+                <div class="skill-card reveal-item"><i class="fas fa-code"></i><h4>Languages</h4><p>Python, Java, C++, C, Verilog</p></div>
+                <div class="skill-card reveal-item"><i class="fas fa-brain"></i><h4>Data Science</h4><p>NumPy, pandas, ML Models, CNNs</p></div>
+                <div class="skill-card reveal-item"><i class="fas fa-microchip"></i><h4>Hardware</h4><p>Arduino, Circuit Design, Soldering</p></div>
+                <div class="skill-card reveal-item"><i class="fas fa-tools"></i><h4>Tools</h4><p>Git, GitHub, Jupyter, MATLAB</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects (Continuous Loop) -->
+    <section class="slider-section" id="projects">
+        <h2 style="text-align: center; margin-bottom: 40px; color: var(--peacock-deep);">Featured Projects</h2>
+        <div class="slider-track">
+            <div class="project-card reveal-item"><img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=2070">
+                <div style="padding:20px; text-align:center;"><h4>🤖 CNN Classification</h4><button class="p-btn" style="margin-top:10px;" onclick="openModal('cnn')">Learn More</button></div></div>
+            <div class="project-card reveal-item"><img src="https://images.unsplash.com/photo-1553406830-ef2513450d76?q=80&w=2070">
+                <div style="padding:20px; text-align:center;"><h4>⚙️ Arduino Fan Model</h4><button class="p-btn" style="margin-top:10px;" onclick="openModal('fan')">Learn More</button></div></div>
+            <div class="project-card reveal-item"><img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2070">
+                <div style="padding:20px; text-align:center;"><h4>📱 Mobile Applications</h4><button class="p-btn" style="margin-top:10px;" onclick="openModal('app')">Learn More</button></div></div>
+            <!-- Duplicates -->
+            <div class="project-card reveal-item"><img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=2070"><div style="padding:20px; text-align:center;"><h4>🤖 CNN Classification</h4><button class="p-btn" style="margin-top:10px;" onclick="openModal('cnn')">Learn More</button></div></div>
+        </div>
+    </section>
+
+    <!-- Contact Me Section -->
+    <section class="contact-section" id="contact">
+        <h2 style="color: var(--peacock-deep);">Contact Me</h2>
+        <div class="contact-grid">
+            <div class="contact-info reveal-item">
+                <div><i class="fas fa-map-marker-alt"></i> India</div>
+                <div><i class="fas fa-envelope"></i> rujuta.kulkarni12@gmail.com</div>
+                <div><i class="fab fa-linkedin"></i> linkedin.com/in/rujuta-kulkarni-b2596131b</div>
+                <div><i class="fab fa-github"></i> github.com/Rujuta-k</div>
+            </div>
+            <div class="reveal-item">
+                <form onsubmit="event.preventDefault(); alert('Message sent!');">
+                    <input type="text" placeholder="Name" style="width:100%; padding:12px; margin-bottom:10px; border:1px solid #ccc;">
+                    <input type="email" placeholder="Email" style="width:100%; padding:12px; margin-bottom:10px; border:1px solid #ccc;">
+                    <textarea placeholder="Message" style="width:100%; padding:12px; margin-bottom:10px; border:1px solid #ccc; height:100px;"></textarea>
+                    <button class="p-btn" type="submit">Contact Me</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer style="padding: 40px 10%; background: var(--peacock-deep); color: white; text-align: center;">
+        <p>© 2026 Rujuta Kulkarni</p>
+    </footer>
+</div>
+
+<div id="projectModal" class="modal">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <div class="modal-body">
+        <div class="modal-side">
+            <h2 id="m-title" style="color: var(--peacock-bright);">Project Details</h2>
+            <hr style="margin: 20px 0; border: 1px solid var(--peacock-bright);"><p id="m-desc" style="line-height:1.6;"></p>
+        </div>
+        <div class="modal-main"><iframe id="m-iframe" src=""></iframe></div>
+    </div>
+</div>
+
+<script>
+    const projectData = {
+        cnn: { title: "🤖 CNN Classification", desc: "A machine learning project using Convolutional Neural Networks (CNNs) to classify data, such as images (e.g., wafer defect detection). It demonstrates skills in deep learning, model training, and pattern recognition.", url: "https://www.youtube.com/embed/aircAruvnKk" },
+        fan: { title: "⚙️ Arduino Fan Model", desc: "A hardware project using Arduino to control a rotating fan embedded with LEDs, creating visual patterns through persistence of vision. It highlights hands-on experience with circuits, microcontrollers, and real-time programming.", url: "https://www.youtube.com/embed/6m6Y796UqIs" },
+        app: { title: "📱 Mobile Applications", desc: "A collection of mobile apps including projects like a Dice App and an Interactive Game App. These applications showcase skills in UI/UX design, user interaction, and app development fundamentals.", url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }
+    };
+    function openModal(id) {
+        document.getElementById('m-title').innerText = projectData[id].title;
+        document.getElementById('m-desc').innerText = projectData[id].desc;
+        document.getElementById('m-iframe').src = projectData[id].url;
+        document.getElementById('projectModal').style.display = "block";
+    }
+    function closeModal() { document.getElementById('projectModal').style.display = "none"; document.getElementById('m-iframe').src = ""; }
+    function toggleTheme() { const body = document.getElementById('body-tag'); const theme = body.getAttribute('data-theme'); body.setAttribute('data-theme', theme === 'dark' ? 'light' : 'dark'); }
+    function toggleView() { document.getElementById('body-tag').classList.toggle('mobile-view'); }
+</script>
+
+</body>
+</html>
